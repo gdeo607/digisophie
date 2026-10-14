@@ -14,9 +14,22 @@ release/*.work/
 
 # Stock firmware is supplied by each user, never by this repository.
 firmware/
+original-os-sysex/
+
+# Elekloader checkout (reference project for Digitone builds, keep out).
+# NOTE: no trailing slash — foo/ never matches a symlink checkout.
+tools/elekloader
+tools/elekloader/mods/*/out/
 
 # Keep only the designated Markdown documents.
 *.md
 !README.md
 !THIRD_PARTY.md
 !DSP.md
+!digisophie-dn/README.md
+!docs/digitone-mod-template.md
+
+# Never commit vendor manuals (Elektron copyright, user-provided reference).
+docs/*.pdf
+# Local logs/scratch.
+*.log
