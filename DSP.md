@@ -54,6 +54,15 @@ conditional signed division on slow-control ticks when the common no-clamp
 case cannot be proven. Replacing it would require an error-bounded reciprocal
 and listening tests at extreme pitch/METAL settings; it is not a free win.
 
+The render loop keeps the voice's running state in locals for the block
+(`ds_render_core`): the track buffer is `int32_t` like most voice fields, so
+with the state in the struct the compiler reloads and stores each field around
+every output sample. The soft clip and the FM index conversion are inlined, and
+the index conversion's full-depth multiply (`mod * 32767 >> 15`) is the exact
+`mod - (mod > 0)`. The output is the same, sample for sample and state for
+state, as before (random voices, models, controls, triggers, envelope sleep,
+odd block lengths and the fold).
+
 ## Verification boundaries
 
 `make test` checks audio continuity, model differences, long-held voices,

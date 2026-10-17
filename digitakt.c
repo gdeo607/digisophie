@@ -10,8 +10,8 @@
 typedef unsigned char u8;
 typedef unsigned short u16;
 typedef signed short s16;
-typedef signed long s32;
-typedef unsigned long u32;
+typedef int32_t s32;           /* the engine's int32_t: m68k-elf and m68k-linux-gnu differ on long */
+typedef uint32_t u32;
 
 #define DS_MACHINE 7
 #define TRACKS 8
